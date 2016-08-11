@@ -87,11 +87,11 @@ app.post('/call', function (req, res){
 	  apiSecret: apiSecret
 	});
 	if(req.body.eventType == 'answer'){
-		client.Call.speakSentence(req.body.callId, "Test").then(function (res) {});
+		client.Call.speakSentence(req.body.callId, "Test", 'https://' + req.get('host') + '/call').then(function (res) {});
 	} else if (req.body.eventType == 'speak'){
 		setTimeout(function() {
 			callReceived[req.body.to] = req.body;
-			client.Call.hangup(req.body.callId).then(function () {});
+			client.Call.hangup(req.body.callId, 'https://' + req.get('host') + '/call').then(function () {});
 		}, 2000);
 	}
 });
