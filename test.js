@@ -86,7 +86,7 @@ app.post('/call', function (req, res){
 	if(req.body.eventType == 'answer'){
 		client.Call.speakSentence(req.body.callId, "Test");
 	} else if (req.body.eventType == 'speak'){
-		var setTimeout(function() {
+		var timeout = setTimeout(function() {
 			callReceived[req.body.to] = req.body;
 			client.Call.hangup(req.body.callId);
 		}, 2000);
