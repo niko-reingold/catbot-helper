@@ -54,7 +54,9 @@ app.get('/call', function (req, res){
 
 	client.Call.create({
 		to: secondNumber,
-		from: firstNumber
+		from: firstNumber,
+		callbackUrl: 'https://' + req.headers.host + '/call',
+		callbackHttpMethod: 'POST'
 	});
 
 	setTimeout(function(){
