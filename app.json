@@ -1,0 +1,30 @@
+{
+  "name": "Catbot Helper",
+  "description": "Node API to assist catbot diagnostics.",
+  "image": "heroku/python",
+  "repository": "https://github.com/heroku/catbot-helper",
+  "keywords": ["node", "catapult" ],
+  "addons": [ "heroku-postgresql" ],
+  "env": {
+    "BANDWIDTH_USER_ID": {
+      "description": "UserId for authentication.  Found on the account tab of the Bandwidth developer console.",
+      "required": "true"
+    },
+    "BANDWIDTH_API_TOKEN": {
+      "description": "Token for authentication.  Found on the account tab of the Bandwidth developer console.",
+      "required": "true"
+    },
+    "BANDWIDTH_API_SECRET": {
+      "description": "Secret for authentication.  Found on the account tab of the Bandwidth developer console.",
+      "required": "true"
+    },
+    "PHONE_NUMBER_ONE": {
+      "description": "Bandwidth phone number that will send messages and transfer incoming messages.  Bandwidth number associated with your app on the my apps tab.",
+      "required": "true"
+    },
+    "PHONE_NUMBER_TWO": {
+      "description": "Bandwidth phone number that will send messages and transfer incoming messages.  Bandwidth number associated with your app on the my apps tab.",
+      "required": "true"
+    }
+  }
+}
