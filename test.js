@@ -1,14 +1,14 @@
 var userId = process.env.BANDWIDTH_USER_ID;
-var request = require('request');
-var nodebandwidth = require('node-bandwidth');
 var apiToken = process.env.BANDWIDTH_API_TOKEN;
 var apiSecret = process.env.BANDWIDTH_API_SECRET;
 var firstNumber = process.env.PHONE_NUMBER_ONE;
 var secondNumber = process.env.PHONE_NUMBER_TWO;
-var bodyParser = require('body-parser')
+var nodebandwidth = require('node-bandwidth');
+var bodyParser = require('body-parser');
+var request = require('request');
+var http = require('http');
 var express = require('express');
 var app = express();
-var http = require('http');
 var callReceived;
 var textReceived;
 
@@ -57,7 +57,7 @@ app.get('/call', function (req, res){
 		from: firstNumber
 	});
 
-	 var timeout = setTimeout(function(){
+	 setTimeout(function(){
 	 	client.Call.create({
 	 		to: firstNumber,
 	 		from: secondNumber
@@ -97,4 +97,5 @@ app.post('/text', function (req, res){
 	res.send("Got the text.");
 	textReceived[req.body.to] = req.body;
 });
+
 app.listen(process.env.PORT);
