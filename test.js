@@ -44,7 +44,7 @@ app.get('/text', function (req, res){
 	}, 1500);
 });
 
-app.get('/call', function (req, res)){
+app.get('/call', function (req, res){
 	callReceived = {};
 	var client = new nodebandwidth({
 	  userId : userId,
