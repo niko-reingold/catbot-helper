@@ -72,7 +72,7 @@ app.get('/call', function (req, res){
 	}, 5000);
 
 	setTimeout(function(){
-		client.Call.hangup(callReceived[firstNumber].+callId);
+		client.Call.hangup(callReceived[firstNumber].callId);
 	}, 5000);
 
 	var response = {};
