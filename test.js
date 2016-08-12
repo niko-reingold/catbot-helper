@@ -83,7 +83,7 @@ app.get('/call', function (req, res){
 		response.incomingCall = callReceived[secondNumber].status == 'done';
 		response.incomingCallId = callReceived[secondNumber].callId;
 		res.send(response);
-	}, 5000);
+	}, 10000);
 });
 
 app.use(bodyParser.json());
