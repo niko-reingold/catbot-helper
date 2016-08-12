@@ -61,7 +61,7 @@ app.get('/call', function (req, res){
 
 	setTimeout(function(){
 		client.Call.hangup(callReceived[secondNumber].callId);
-	}, 5000);
+	}, 10000);
 
 	setTimeout(function(){
 		client.Call.create({
@@ -74,7 +74,7 @@ app.get('/call', function (req, res){
 
 	setTimeout(function(){
 		client.Call.hangup(callReceived[firstNumber].callId);
-	}, 5000);
+	}, 10000);
 
 	var response = {};
 	var timeout = setTimeout(function(){
