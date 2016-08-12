@@ -69,6 +69,7 @@ app.get('/call', function (req, res){
 			from: secondNumber,
 			callbackUrl: 'https://' + req.get('host') + '/call',
 			callbackHttpMethod: 'POST'
+		});
 	}, 5000);
 
 	setTimeout(function(){
