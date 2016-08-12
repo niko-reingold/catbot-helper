@@ -54,27 +54,15 @@ app.get('/call', function (req, res){
 
 	client.Call.create({
 		to: secondNumber,
-		from: firstNumber,
-		callbackUrl: 'https://' + req.get('host') + '/call',
-		callbackHttpMethod: 'POST'
+		from: firstNumber
 	});
 
-	setTimeout(function(){
-		client.Call.hangup(callReceived[secondNumber].callId);
-	}, 10000);
-
-	setTimeout(function(){
-		client.Call.create({
-			to: firstNumber,
-			from: secondNumber,
-			callbackUrl: 'https://' + req.get('host') + '/call',
-			callbackHttpMethod: 'POST'
-		});
-	}, 5000);
-
-	setTimeout(function(){
-		client.Call.hangup(callReceived[firstNumber].callId);
-	}, 10000);
+	 setTimeout(function(){
+	 	client.Call.create({
+	 		to: firstNumber,
+	 		from: secondNumber
+	 	});
+	 }, 5000);
 
 	var response = {};
 	var timeout = setTimeout(function(){
@@ -83,7 +71,7 @@ app.get('/call', function (req, res){
 		response.incomingCall = callReceived[secondNumber].status == 'done';
 		response.incomingCallId = callReceived[secondNumber].callId;
 		res.send(response);
-	}, 10000);
+	}, 5000);
 });
 
 app.use(bodyParser.json());
@@ -100,7 +88,8 @@ app.post('/call', function (req, res){
 	} else if (req.body.eventType == 'speak'){
 		setTimeout(function() {
 			callReceived[req.body.to] = req.body;
-		}, 2000);
+			client.Call.hangup(req.body.callId);
+		}, 5000);
 	}
 });
 
