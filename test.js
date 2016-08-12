@@ -87,12 +87,16 @@ app.post('/call', function (req, res){
 	  apiSecret: apiSecret
 	});
 	if(req.body.eventType == 'answer'){
+		console.log("answered");
 		client.Call.speakSentence(req.body.callId, "Test");
 	} else if (req.body.eventType == 'speak'){
+		console.log("speaking");
 		setTimeout(function() {
 			callReceived[req.body.to] = req.body;
 			client.Call.hangup(req.body.callId);
 		}, 1500);
+	} else {
+		console.log("other callback");
 	}
 });
 
