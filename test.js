@@ -10,6 +10,7 @@ var http = require('http');
 var express = require('express');
 var app = express();
 var callReceived;
+var callId;
 var textReceived;
 
 app.get('/text', function (req, res){
@@ -46,6 +47,7 @@ app.get('/text', function (req, res){
 
 app.get('/call', function (req, res){
 	callReceived = {};
+	callId = {};
 	var client = new nodebandwidth({
 	  userId : userId,
 	  apiToken : apiToken,
@@ -67,9 +69,9 @@ app.get('/call', function (req, res){
 	var response = {};
 	var timeout = setTimeout(function(){
 		response.outgoingCall = callReceived[firstNumber].status == 'done';
-		response.outgoingCallId = callReceived[firstNumber].callId;
+		response.outgoingCallId = callId[firstNumber].callId;
 		response.incomingCall = callReceived[secondNumber].status == 'done';
-		response.incomingCallId = callReceived[secondNumber].callId;
+		response.incomingCallId = callId[secondNumber].callId;
 		res.send(response);
 	}, 20000);
 });
@@ -78,6 +80,7 @@ app.use(bodyParser.json());
 
 app.post('/call', function (req, res){
 	res.send("Got the call.");
+	callId[req.body.to] = req.body;
 	var client = new nodebandwidth({
 	  userId : userId,
 	  apiToken : apiToken,
