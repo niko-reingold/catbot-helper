@@ -64,7 +64,7 @@ app.get('/call', function (req, res){
 	 		to: firstNumber,
 	 		from: secondNumber
 	 	});
-	 }, 5000);
+	 }, 20000);
 
 	var response = {};
 	var timeout = setTimeout(function(){
@@ -73,7 +73,7 @@ app.get('/call', function (req, res){
 		response.incomingCall = callReceived[secondNumber].status == 'done';
 		response.incomingCallId = callId[secondNumber].callId;
 		res.send(response);
-	}, 20000);
+	}, 400000);
 });
 
 app.use(bodyParser.json());
@@ -89,7 +89,7 @@ app.post('/call', function (req, res){
 	if(req.body.eventType == 'answer'){
 		setTimeout(function() {
 			client.Call.speakSentence(req.body.callId, "Test");
-		}, 5000);
+		}, 2000);
 	} else if (req.body.eventType == 'speak'){
 		setTimeout(function() {
 			callReceived[req.body.to] = req.body;
