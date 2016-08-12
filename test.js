@@ -84,7 +84,9 @@ app.post('/call', function (req, res){
 	  apiSecret: apiSecret
 	});
 	if(req.body.eventType == 'answer'){
-		client.Call.speakSentence(req.body.callId, "Test");
+		setTimeout(function() {
+			client.Call.speakSentence(req.body.callId, "Test");
+		}, 5000);
 	} else if (req.body.eventType == 'speak'){
 		setTimeout(function() {
 			callReceived[req.body.to] = req.body;
