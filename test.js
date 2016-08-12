@@ -79,7 +79,7 @@ app.get('/call', function (req, res){
 app.use(bodyParser.json());
 
 app.post('/call', function (req, res){
-	res.send("Got the call.");
+	console.log("Got the call.");
 	callId[req.body.to] = req.body;
 	var client = new nodebandwidth({
 	  userId : userId,
