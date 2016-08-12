@@ -60,11 +60,19 @@ app.get('/call', function (req, res){
 	});
 
 	setTimeout(function(){
+		client.Call.hangup(callReceived[secondNumber].callId);
+	}, 5000);
+
+	setTimeout(function(){
 		client.Call.create({
 			to: firstNumber,
 			from: secondNumber,
 			callbackUrl: 'https://' + req.get('host') + '/call',
 			callbackHttpMethod: 'POST'
+	}, 5000);
+
+	setTimeout(function(){
+		client.Call.hangup(callReceived[firstNumber].+callId);
 	}, 5000);
 
 	var response = {};
@@ -87,11 +95,10 @@ app.post('/call', function (req, res){
 	  apiSecret: apiSecret
 	});
 	if(req.body.eventType == 'answer'){
-		client.Call.speakSentence(req.body.callId, "Test", 'https://' + req.get('host') + '/call').then(function (res) {});
+		client.Call.speakSentence(req.body.callId, "Test");
 	} else if (req.body.eventType == 'speak'){
 		setTimeout(function() {
 			callReceived[req.body.to] = req.body;
-			client.Call.hangup(req.body.callId, 'https://' + req.get('host') + '/call').then(function () {});
 		}, 2000);
 	}
 });
