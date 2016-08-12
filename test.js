@@ -55,16 +55,17 @@ app.get('/call', function (req, res){
 	});
 
 	client.Call.create({
-		to: secondNumber,
-		from: firstNumber
-	});
+ 		to: firstNumber,
+ 		from: secondNumber
+ 	});
+	
 
-	 setTimeout(function(){
-	 	client.Call.create({
-	 		to: firstNumber,
-	 		from: secondNumber
-	 	});
-	 }, 10000);
+	setTimeout(function(){
+		client.Call.create({
+			to: secondNumber,
+			from: firstNumber
+		});
+	}, 8000);
 
 	var response = {};
 	var timeout = setTimeout(function(){
@@ -87,14 +88,12 @@ app.post('/call', function (req, res){
 	  apiSecret: apiSecret
 	});
 	if(req.body.eventType == 'answer'){
-		setTimeout(function() {
-			client.Call.speakSentence(req.body.callId, "Test");
-		}, 1000);
+		client.Call.speakSentence(req.body.callId, "Test");
 	} else if (req.body.eventType == 'speak'){
 		setTimeout(function() {
 			callReceived[req.body.to] = req.body;
 			client.Call.hangup(req.body.callId);
-		}, 3000);
+		}, 1500);
 	}
 });
 
