@@ -68,9 +68,9 @@ app.get('/call', function (req, res){
 
 	var response = {};
 	var timeout = setTimeout(function(){
-		response.outgoingCall = callReceived[firstNumber].status == 'done';
+		response.outgoingCall = callReceived[firstNumber].state == 'complete';
 		response.outgoingCallId = callId[firstNumber].callId;
-		response.incomingCall = callReceived[secondNumber].status == 'done';
+		response.incomingCall = callReceived[secondNumber].state == 'complete';
 		response.incomingCallId = callId[secondNumber].callId;
 		res.send(response);
 	}, 20000);
