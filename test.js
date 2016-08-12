@@ -55,17 +55,16 @@ app.get('/call', function (req, res){
 	});
 
 	client.Call.create({
- 		to: firstNumber,
- 		from: secondNumber
- 	});
-	
+		to: secondNumber,
+		from: firstNumber
+	});
 
-	setTimeout(function(){
-		client.Call.create({
-			to: secondNumber,
-			from: firstNumber
-		});
-	}, 8000);
+	 setTimeout(function(){
+	 	client.Call.create({
+	 		to: firstNumber,
+	 		from: secondNumber
+	 	});
+	 }, 8000);
 
 	var response = {};
 	var timeout = setTimeout(function(){
